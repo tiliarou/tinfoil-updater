@@ -4,7 +4,7 @@
 #define TINFOIL_URL         "https://tinfoil.io/repo/tinfoil.latest.zip"
 #define TINFOIL_NRO_URL     "https://tinfoil.media/repo/tinfoil.json"
 #define HBG_URL             "https://thehbg.shop/files/hbgshop.latest.zip"
-#define APP_URL             "https://jits.cf/update"
+#define APP_URL             "https://github.com/JackInTheShop/tinfoil-updater/releases/latest/download/tinfoil-updater.nro"
 
 // legacy versions of tinfoil
 #define legacy500           "https://tinfoil.io/repo/tinfoil.500.nro"
