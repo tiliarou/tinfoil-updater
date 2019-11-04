@@ -72,6 +72,6 @@ __**The app currently has 4 options.**__
 
 # Patreon
 
-Feel free to support me ITotalJustice on patreon, he would really appreciate it!
+Feel free to support ITotalJustice on patreon, he would really appreciate it!
 
 <a href="https://www.patreon.com/totaljustice"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Patreon donate button" /> </a>
