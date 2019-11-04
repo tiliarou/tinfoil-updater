@@ -5,10 +5,10 @@
 
 #include "download.h"
 #include "menu.h"
+#include "util.h"           // for ON / OFF defines.
 
 #define API_AGENT           "ITotalJustice"
 #define DOWNLOAD_BAR_MAX    500
-
 
 struct MemoryStruct
 {
@@ -26,7 +26,7 @@ static size_t write_memory_callback(void *contents, size_t size, size_t nmemb, v
 
   if (ptr == NULL)
   {
-      error_box(350, 250, "Failed to realloc mem");
+      errorBox(350, 250, "Failed to realloc mem");
       return 0;
   }
  
@@ -50,18 +50,14 @@ int download_progress(void *p, double dltotal, double dlnow, double ultotal, dou
     // update progress bar every so often.
     if (counter == 0 || counter == 2 || counter == 4 || counter == 6 || counter == 8)
     {
-        // clear the renderer.
-        SDL_RenderClear(SDL_GetRenderer(SDL_GetWindow()));
-        // load screenshot of the main menu.
-        SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindow()), screen_shot, NULL, NULL);
-        // pop_up box.
-        pop_up_box(fntSmall, 350, 250, white, "Downloading...");
-        // bar max size.
-        SDL_DrawShape(white, 380, 380, DOWNLOAD_BAR_MAX, 30);
-        // progress bar being filled.
-        SDL_DrawShape(faint_blue, 380, 380, (dlnow / dltotal) * DOWNLOAD_BAR_MAX, 30);
-        // render everything to the screen.
-        SDL_UpdateRenderer();
+        printOptionList(0);
+        popUpBox(fntSmall, 350, 250, SDL_GetColour(white), "Downloading...");
+        // bar max size
+        drawShape(SDL_GetColour(white), 380, 380, DOWNLOAD_BAR_MAX, 30);
+        // progress bar being filled
+        drawShape(SDL_GetColour(faint_blue), 380, 380, (dlnow / dltotal) * DOWNLOAD_BAR_MAX, 30);
+
+        updateRenderer();
     }
 	return 0;
 }
@@ -105,10 +101,9 @@ int downloadFile(const char *url, const char *output)
 
             if (res == CURLE_OK) return 0;
         }
+        fclose(fp);
     }
 
-    SDL_RenderClear(SDL_GetRenderer(SDL_GetWindow()));
-    SDL_RenderCopy(SDL_GetRenderer(SDL_GetWindow()), screen_shot, NULL, NULL);
-    error_box(350, 250, "Download failed...");
+    errorBox(350, 250, "Download failed");
     return 1;
 }
