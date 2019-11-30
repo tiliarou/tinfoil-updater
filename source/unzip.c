@@ -26,7 +26,16 @@ int unzip(const char *output, int mode)
 
         unzOpenCurrentFile(zfile);
         unzGetCurrentFileInfo(zfile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
-		
+
+        // don't overwrite ChoiDojourNX.
+        if (!strstr(filename_inzip, "ChoiDojourNX"))
+        {
+              // check if the file exists.
+              FILE *fp = fopen(filename_inzip, "r");
+              if (fp) fclose(fp);
+              else goto jump_to_end;
+        }
+
         // check if the string ends with a /, if so, then its a directory.
         if ((filename_inzip[strlen(filename_inzip) - 1]) == '/')
         {
@@ -43,15 +52,7 @@ int unzip(const char *output, int mode)
         {
             const char *write_filename = filename_inzip;
             void *buf = malloc(WRITEBUFFERSIZE);
-		// attempt to open file, skip if file already exists
-            FILE *outfile = fopen(write_filename, "r");
-            if (outfile !=NULL) 
-	    {
-		fclose(outfile);
-		goto jump_to_end;
-	    }
-			
-            outfile = fopen(write_filename, "wb");
+	          FILE *outfile = fopen(write_filename, "wb");
 
             drawText(fntSmall, 350, 350, SDL_GetColour(white), write_filename);
 
