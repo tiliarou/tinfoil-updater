@@ -39,5 +39,6 @@ void update_app()
         // using errorBox as a message window on this occasion. 
         errorBox(400, 250, "      Update complete!\nRestart app to take effect.");
     }
-    */
+
 }
+*/
