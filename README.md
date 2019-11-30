@@ -30,11 +30,6 @@ __**The app currently has 2 options.**__
 * Useful if you need to roll-back for supporting older homebrew or themes.
 
 
-
-Update App: Not currently implemented, may eventually:
-Downloads the latest version of this app straight from github!
-Deletes the previous old version.
-
 ----
 
 # Screenshots
