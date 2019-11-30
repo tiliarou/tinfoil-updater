@@ -53,7 +53,7 @@ coming soon
 
 [UNderPrivlidged](https://github.com/UNderPrivlidged) for hosting firmware!
 
-[blawar](https://github.com/blawar) for Switch Dev help!
+[blawar](https://github.com/blawar) for Switch Dev help and Tinfoil!
 
 [toph](https://github.com/sudot0ph) for the design of potentially some icons used within the app!
 
