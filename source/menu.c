@@ -27,7 +27,7 @@ void printOptionList(int cursor)
     refreshScreen();
 
     char *option_list[]      = {    "Download latest Official Firmware files", \
-                                    "Download recommended Official Firmware files" };
+                                    "Download previous Official Firmware files" };
 
     char *description_list[] = {    "This app extracts OFW files to sd:/OFW/ for installation with ChoiDojourNX.", \
                                     "This app extracts OFW files to sd:/OFW/ for installation with ChoiDojourNX." };
