@@ -47,6 +47,8 @@ coming soon
 
 [ITotalJustice](https://github.com/ITotalJustice) for coding everything in this app! I just changed things.
 
+[Jack](https://github.com/JackInTheShop) for coding the GUI!
+
 [rajkosto](https://github.com/rajkosto) for ChoiDojourNX and RajNX!
 
 [UNderPrivlidged](https://github.com/UNderPrivlidged) for hosting firmware!
