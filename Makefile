@@ -37,9 +37,9 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   of a homebrew executable (.nro). This is intended to be used for sysmodules.
 #   NACP building is skipped as well.
 #---------------------------------------------------------------------------------
-APP_TITLE   := Tinfoil-Updater
-APP_AUTHOR  := TotalJustice
-APP_VERSION := 0.3.1
+APP_TITLE   := Firmware-Downloader
+APP_AUTHOR  := archbox
+APP_VERSION := 0.1.0
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
@@ -56,7 +56,7 @@ ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 CFLAGS	:=	-g -Wall -O3 -ffunction-sections \
 			$(ARCH) $(DEFINES)
 
-CFLAGS	+=	$(INCLUDE) -D__SWITCH__
+CFLAGS	+=	$(INCLUDE) -D__SWITCH__ `freetype-config --cflags` `sdl2-config --cflags`
 
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 
