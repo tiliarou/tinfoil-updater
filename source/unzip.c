@@ -26,19 +26,7 @@ int unzip(const char *output, int mode)
 
         unzOpenCurrentFile(zfile);
         unzGetCurrentFileInfo(zfile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
-
-        // don't overwrite tinfoil config.
-        if (!strcmp(filename_inzip, "switch/tinfoil/options.json"))
-        {
-            // check if the file exists.
-            FILE *fp = fopen("/tinfoil/options.json", "r");
-            if (fp) fclose(fp);
-            else goto jump_to_end;
-        }
-
-        if (mode == UP_TINFOIL_FOLDER && !strstr(filename_inzip, "/tinfoil/")) goto jump_to_end;
-        else if (mode == UP_TINFOIL_NRO && strcmp(filename_inzip, "switch/tinfoil/tinfoil.nro")) goto jump_to_end;
-
+		
         // check if the string ends with a /, if so, then its a directory.
         if ((filename_inzip[strlen(filename_inzip) - 1]) == '/')
         {
@@ -51,13 +39,18 @@ int unzip(const char *output, int mode)
                 mkdir(filename_inzip, 0777);
             }
         }
-
         else
         {
             const char *write_filename = filename_inzip;
             void *buf = malloc(WRITEBUFFERSIZE);
-
-            FILE *outfile = fopen(write_filename, "wb");
+			// attempt to open file, skip if file already exists
+            FILE *outfile = fopen(write_filename, "r");
+            if (outfile !=NULL) {
+			fclose(outfile);
+			goto jump_to_end;
+			}
+			
+			outfile = fopen(write_filename, "wb");
 
             drawText(fntSmall, 350, 350, SDL_GetColour(white), write_filename);
 
