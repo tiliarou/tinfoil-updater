@@ -47,7 +47,7 @@ coming soon
 
 [ITotalJustice](https://github.com/ITotalJustice) for coding everything in this app! I just changed things.
 
-[Jack](https://github.com/JackInTheShop) for coding the GUI!
+[Jack](https://github.com/JackInTheShop) for adding the atmosphere-updater GUI to tinfoil-updater!
 
 [rajkosto](https://github.com/rajkosto) for ChoiDojourNX and RajNX!
 
