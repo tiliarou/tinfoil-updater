@@ -1,6 +1,6 @@
 # Firmware-Downloader
 
-Download and extract OFW on your switch's SD card!
+Download and extract OFW on your switch's SD card! This doesn't actually install the firmware, you'd still need to run ChoiDojourNX for that. SX OS users might as well just run [blawar](https://github.com/blawar)'s [Tinfoil](https://tinfoil.io/Download) for an AIO solution to download and install any firmware. 
 
 ----
 
