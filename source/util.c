@@ -7,18 +7,24 @@
 #include "unzip.h"
 #include "download.h"
 
-#define TEMP_FILE               "/switch/tinfoil-updater/temp"
+#define TEMP_FILE               "/switch/firmware-downloader/temp"
 
-int updateTinfoil(char *url, char *output, int mode)
+int downloadFirmware(char *url, char *output, int mode)
 {
     if (!downloadFile(url, TEMP_FILE))
     {
         unzip(TEMP_FILE, mode);
-        errorBox(400, 250, "      Update complete!");
+        popUpBox(fntSmall,400, 250, SDL_GetColour(white), "Download complete!");
+		drawText(fntSmall,400, 350, SDL_GetColour(white), "Install with ChoiDojourNX.");
+		drawText(fntSmall,400, 450, SDL_GetColour(white), "Firmware files are in sd:/OFW/");
+		updateRenderer();
+
+		sleep(5);
     }
     return 1;
 }
 
+/*  
 void update_app()
 {
     // download new nro as a tempfile.
@@ -33,4 +39,5 @@ void update_app()
         // using errorBox as a message window on this occasion. 
         errorBox(400, 250, "      Update complete!\nRestart app to take effect.");
     }
+    */
 }
