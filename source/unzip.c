@@ -43,14 +43,15 @@ int unzip(const char *output, int mode)
         {
             const char *write_filename = filename_inzip;
             void *buf = malloc(WRITEBUFFERSIZE);
-			// attempt to open file, skip if file already exists
+		// attempt to open file, skip if file already exists
             FILE *outfile = fopen(write_filename, "r");
-            if (outfile !=NULL) {
-			fclose(outfile);
-			goto jump_to_end;
-			}
+            if (outfile !=NULL) 
+	    {
+		fclose(outfile);
+		goto jump_to_end;
+	    }
 			
-			outfile = fopen(write_filename, "wb");
+            outfile = fopen(write_filename, "wb");
 
             drawText(fntSmall, 350, 350, SDL_GetColour(white), write_filename);
 
