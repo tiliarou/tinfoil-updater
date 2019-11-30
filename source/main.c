@@ -14,13 +14,12 @@
 int appInit()
 {
     Result rc;
-
     if (R_FAILED(rc = socketInitializeDefault()))           // for curl / nxlink.
         printf("socketInitializeDefault() failed: 0x%x.\n\n", rc);
 
     #ifdef DEBUG
     if (R_FAILED(rc = nxlinkStdio()))                       // redirect all printout to console window.
-        printf("nxlinkStdio() failed: 0x%x.\n\n", rc)
+        printf("nxlinkStdio() failed: 0x%x.\n\n", rc);
     #endif
 
     if (R_FAILED(rc = plInitialize()))                      // for shared fonts.
@@ -59,7 +58,20 @@ int main(int argc, char **argv)
     int touch_lock = OFF;
     u32 tch = 0;
     touchPosition touch;
-    
+	
+    AppletType at = appletGetAppletType();
+    if (at != AppletType_Application && at != AppletType_SystemApplication) 
+	{
+		drawText(fntSmall, 25,50, SDL_GetColour(white), "You are running Applet Mode! Downloading and extracting large files (like firmware) will fail with an out of memory error! Run hbmenu via title override or an NSP forwarder.");
+		
+		drawText(fntSmall, 10,350, SDL_GetColour(white), "Note that writing to an exFAT formatted SD can cause corruption. Always use FAT32 with homebrew.");
+		drawImageScale(error_icon, 450, 410, 256, 256);
+		updateRenderer();
+
+		sleep(10);
+		appExit();
+		return 0;
+    }
     // muh loooooop
     while(appletMainLoop())
     {
@@ -95,24 +107,16 @@ int main(int argc, char **argv)
 
             switch (cursor)
             {
-            case UP_ALL:
-                if (yesNoBox(cursor, 390, 250, "Full Tinfoil Update?") == YES)
-                    updateTinfoil(getUrl(), TINFOIL_OUTPUT, cursor);
+            case UP_LATEST:
+				downloadFirmware(LATEST_URL, DL_OUTPUT, cursor);
                 break;
-
-            case UP_TINFOIL_FOLDER:
-                if (yesNoBox(cursor, 390, 250, "Update Tinfoil Folder?") == YES)
-                    updateTinfoil(getUrl(), TINFOIL_OUTPUT, cursor);
-                break;
-
-            case UP_TINFOIL_NRO:
-                if (yesNoBox(cursor, 390, 250, "Update Tinfoil NRO?") == YES)
-                    updateTinfoil(getUrl(), TINFOIL_OUTPUT, cursor);
-                break;
-
+            /*
             case UP_APP:
                 if (yesNoBox(cursor, 390, 250, "Update App?") == YES)
                     update_app();
+            */
+            case UP_STABLE:
+                downloadFirmware(STABLE_URL, DL_OUTPUT, cursor);
                 break;
             }
         }
@@ -120,10 +124,6 @@ int main(int argc, char **argv)
         // exit...
         if (kDown & KEY_PLUS || (touch.px > 1145 && touch.px < SCREEN_W && touch.py > 675 && touch.py < SCREEN_H))
             break;
-
-        // change url
-        if (kDown & KEY_X)
-            changeUrl();
 
         // lock touch if the user has already touched the screen (touch tap).
         if (touch_count > 0) touch_lock = ON;
