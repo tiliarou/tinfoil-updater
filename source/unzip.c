@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <switch.h>
 #include <errno.h>
+#include <assert.h>
 
 #include "unzip.h"
 #include "menu.h"
@@ -11,19 +12,19 @@
 #define WRITEBUFFERSIZE 15000000 // 15 MB
 #define MAXFILENAME     256
 
-int mkpath(char *dir, mode_t mode)
-{
-    if (!dir) {
-        errno = EINVAL;
-        return 1;
-    }
-
-    if (strlen(dir) == 1 && dir[0] == '/')
-        return 0;
-
-    mkpath(dirname(strdupa(dir)), mode);
-
-    return mkdir(dir, mode);
+int mkpath(char* file_path, mode_t mode) {
+	assert(file_path && *file_path);
+	for (char* p = strchr(file_path + 1, '/'); p; p = strchr(p + 1, '/')) {
+		*p = '\0';
+		if (mkdir(file_path, mode) == -1) {
+			if (errno != EEXIST) {
+				*p = '/';
+				return -1;
+			}
+		}
+		*p = '/';
+	}
+	return 0;
 }
 
 int unzip(const char *output, int mode)
