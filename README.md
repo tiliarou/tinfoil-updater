@@ -1,6 +1,6 @@
 # Firmware-Downloader
 
-Download and extract OFW on your switch's SD card! This doesn't actually install the firmware, you'd still need to run ChoiDojourNX for that. SX OS users might as well just run [blawar](https://github.com/blawar)'s [Tinfoil](https://tinfoil.io/Download) for an AIO solution to download and install any firmware. 
+Download and extract OFW on your switch's SD card! This doesn't actually install the firmware, you'd still need to run ChoiDojourNX for that. SX OS users might as well just run [blawar](https://github.com/blawar)'s [Tinfoil](https://tinfoil.io/Download) for an AIO solution to download and install any firmware.
 
 ----
 
@@ -10,7 +10,7 @@ Download the the latest release from [here](https://github.com/JackInTheShop/atm
 
 Move the downloaded .nro onto you nintendo switch sd card inside the folder **/switch/firmware-downloader**.
 
-This app extracts OFW files to /OFW/ for installation with ChoiDojourNX. It will add rajkosto's ChoiDojourNX.nro to /switch/ChoiDojourNX/ if one does not already exist. 
+This app extracts OFW files to /OFW/ for installation with ChoiDojourNX. It will add rajkosto's ChoiDojourNX.nro to /switch/ChoiDojourNX/ if one does not already exist.
 
 That's it!
 
@@ -46,11 +46,11 @@ coming soon
 
 [rajkosto](https://github.com/rajkosto) for ChoiDojourNX and RajNX!
 
+[ThiccSatan](https://twitter.com/chonyomankis) for all of the new icons and the new background! 🐢
+
 [UNderPrivlidged](https://github.com/UNderPrivlidged) for hosting firmware!
 
 [blawar](https://github.com/blawar) for Switch Dev help and Tinfoil!
-
-[toph](https://github.com/sudot0ph) for the design of potentially some icons used within the app!
 
 [Black Rabbit](https://github.com/BlackRabbit22) for the design of the plus icon!
 

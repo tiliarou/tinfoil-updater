@@ -126,7 +126,7 @@ void loadFonts()
 
 void loadTextures()
 {
-    imageLoad(&background,      "romfs:/background.jpg");
+    imageLoad(&background,      "romfs:/background.png");
     imageLoad(&app_icon,        "romfs:/app_icon.png");
     imageLoad(&down_icon,        "romfs:/down_icon.png");
     imageLoad(&error_icon,      "romfs:/error_icon.png");
@@ -154,7 +154,7 @@ void sdlInit()
 
     main_window = SDL_CreateWindow("firmware-downloader", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_W, SCREEN_H, SDL_WINDOW_SHOWN);
     main_renderer = SDL_CreateRenderer(main_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    
+
     // highest quality
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 

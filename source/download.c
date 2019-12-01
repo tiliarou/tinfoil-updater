@@ -29,12 +29,12 @@ static size_t write_memory_callback(void *contents, size_t size, size_t nmemb, v
       errorBox(350, 250, "Failed to realloc mem! Do not run in applet mode!");
       return 0;
   }
- 
+
   mem->memory = ptr;
   memcpy(&(mem->memory[mem->size]), contents, realsize);
   mem->size += realsize;
   mem->memory[mem->size] = 0;
- 
+
   return realsize;
 }
 
@@ -100,7 +100,7 @@ int downloadFile(const char *url, const char *output)
 
             if (res == CURLE_OK) return 0;
         }
-        
+
     }
 
     errorBox(345, 250, "Download failed! Are you offline?");

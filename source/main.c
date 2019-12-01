@@ -58,12 +58,12 @@ int main(int argc, char **argv)
     int touch_lock = OFF;
     u32 tch = 0;
     touchPosition touch;
-	
+
     AppletType at = appletGetAppletType();
-    if (at != AppletType_Application && at != AppletType_SystemApplication) 
+    if (at != AppletType_Application && at != AppletType_SystemApplication)
 	{
 		drawText(fntSmall, 25,50, SDL_GetColour(white), "You are running Applet Mode! Downloading and extracting large files (like firmware) will fail with an out of memory error! Run hbmenu via title override or an NSP forwarder.");
-		
+
 		drawText(fntSmall, 10,350, SDL_GetColour(white), "Note that writing to an exFAT formatted SD can cause corruption. Always use FAT32 with homebrew.");
 		drawImageScale(error_icon, 450, 410, 256, 256);
 		updateRenderer();

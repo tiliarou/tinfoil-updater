@@ -39,7 +39,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 #---------------------------------------------------------------------------------
 APP_TITLE   := Firmware-Downloader
 APP_AUTHOR  := archbox
-APP_VERSION := 0.1.0
+APP_VERSION := 0.1.1
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
