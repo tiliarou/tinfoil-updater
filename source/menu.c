@@ -11,7 +11,7 @@
 void refreshScreen()
 {
     clearRenderer();
-    
+
     // app version.
     drawText(fntMedium, 40, 40, SDL_GetColour(white), APP_VERSION);
 
@@ -27,7 +27,7 @@ void printOptionList(int cursor)
     refreshScreen();
 
     char *option_list[]      = {    "Download latest Official Firmware files", \
-                                    "Download previous Official Firmware files" };
+                                    "Download legacy Official Firmware files" };
 
     char *description_list[] = {    "This app extracts OFW files to sd:/OFW/ for installation with ChoiDojourNX.", \
                                     "This app extracts OFW files to sd:/OFW/ for installation with ChoiDojourNX." };
