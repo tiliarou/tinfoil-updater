@@ -3,12 +3,28 @@
 #include <string.h>
 #include <dirent.h>
 #include <switch.h>
+#include <errno.h>
 
 #include "unzip.h"
 #include "menu.h"
 
 #define WRITEBUFFERSIZE 15000000 // 15 MB
 #define MAXFILENAME     256
+
+int mkpath(char *dir, mode_t mode)
+{
+    if (!dir) {
+        errno = EINVAL;
+        return 1;
+    }
+
+    if (strlen(dir) == 1 && dir[0] == '/')
+        return 0;
+
+    mkpath(dirname(strdupa(dir)), mode);
+
+    return mkdir(dir, mode);
+}
 
 int unzip(const char *output, int mode)
 {
@@ -45,7 +61,7 @@ int unzip(const char *output, int mode)
             else
             {
                 drawText(fntSmall, 350, 350, SDL_GetColour(white), filename_inzip);
-                mkdir(filename_inzip, 0777);
+                mkpath(filename_inzip, 0777);
             }
         }
         else
