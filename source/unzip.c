@@ -3,12 +3,29 @@
 #include <string.h>
 #include <dirent.h>
 #include <switch.h>
+#include <errno.h>
+#include <assert.h>
 
 #include "unzip.h"
 #include "menu.h"
 
 #define WRITEBUFFERSIZE 15000000 // 15 MB
 #define MAXFILENAME     256
+
+int mkpath(char* file_path, mode_t mode) {
+	assert(file_path && *file_path);
+	for (char* p = strchr(file_path + 1, '/'); p; p = strchr(p + 1, '/')) {
+		*p = '\0';
+		if (mkdir(file_path, mode) == -1) {
+			if (errno != EEXIST) {
+				*p = '/';
+				return -1;
+			}
+		}
+		*p = '/';
+	}
+	return 0;
+}
 
 int unzip(const char *output, int mode)
 {
@@ -27,17 +44,14 @@ int unzip(const char *output, int mode)
         unzOpenCurrentFile(zfile);
         unzGetCurrentFileInfo(zfile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
 
-        // don't overwrite tinfoil config.
-        if (!strcmp(filename_inzip, "switch/tinfoil/options.json"))
+        // don't overwrite ChoiDojourNX.
+        if (!strstr(filename_inzip, "ChoiDojourNX"))
         {
-            // check if the file exists.
-            FILE *fp = fopen("/tinfoil/options.json", "r");
-            if (fp) fclose(fp);
-            else goto jump_to_end;
+              // check if the file exists.
+              FILE *fp = fopen(filename_inzip, "r");
+              if (fp) fclose(fp);
+              else goto jump_to_end;
         }
-
-        if (mode == UP_TINFOIL_FOLDER && !strstr(filename_inzip, "/tinfoil/")) goto jump_to_end;
-        else if (mode == UP_TINFOIL_NRO && strcmp(filename_inzip, "switch/tinfoil/tinfoil.nro")) goto jump_to_end;
 
         // check if the string ends with a /, if so, then its a directory.
         if ((filename_inzip[strlen(filename_inzip) - 1]) == '/')
@@ -48,16 +62,14 @@ int unzip(const char *output, int mode)
             else
             {
                 drawText(fntSmall, 350, 350, SDL_GetColour(white), filename_inzip);
-                mkdir(filename_inzip, 0777);
+                mkpath(filename_inzip, 0777);
             }
         }
-
         else
         {
             const char *write_filename = filename_inzip;
             void *buf = malloc(WRITEBUFFERSIZE);
-
-            FILE *outfile = fopen(write_filename, "wb");
+	          FILE *outfile = fopen(write_filename, "wb");
 
             drawText(fntSmall, 350, 350, SDL_GetColour(white), write_filename);
 

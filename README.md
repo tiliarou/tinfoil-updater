@@ -1,6 +1,6 @@
-# Tinfoil-Updater
+# Firmware-Downloader
 
-Update Tinfoil from within your switch!
+Download and extract OFW on your switch's SD card! This doesn't actually install the firmware, you'd still need to run ChoiDojourNX for that. SX OS users might as well just run [blawar](https://github.com/blawar)'s [Tinfoil](https://tinfoil.io/Download) for an AIO solution to download and install any firmware.
 
 ----
 
@@ -8,7 +8,9 @@ Update Tinfoil from within your switch!
 
 Download the the latest release from [here](https://github.com/JackInTheShop/atmosphere-updater/releases).
 
-Move the downloaded .nro onto you nintendo switch sd card inside the folder **/switch/tinfoil-updater**.
+Move the downloaded .nro onto you nintendo switch sd card inside the folder **/switch/firmware-downloader**.
+
+This app extracts OFW files to /OFW/ for installation with ChoiDojourNX. It will add rajkosto's ChoiDojourNX.nro to /switch/ChoiDojourNX/ if one does not already exist.
 
 That's it!
 
@@ -16,62 +18,52 @@ That's it!
 
 # Usage
 
-__**The app currently has 4 options.**__
+__**The app currently has 2 options.**__
 
-**Full Tinfoil Update:**
+**Download latest Official Firmware files:**
 
-* Downloads the latest Tinfoil release and installs everything from that release.
+* Downloads OFW 9.0.1 and extracts it to /OFW/
 
-**Update Tinfoil Folder:**
+**Download previous Official Firmware files:**
 
-* Downloads the latest Tinfoil release and only updates the `/switch/tinfoil` folder.
+* Downloads OFW 8.1.0 and extracts it to /OFW/
+* Useful if you need to roll-back for supporting older homebrew or themes.
 
-**Update Tinfoil NRO:**
-
-* This will only update Tinfoil itself.
-
-**Update App:**
-
-* Downloads the latest version of this app straight from github!
-* Deletes the previous old version.
 
 ----
 
 # Screenshots
 
-**Menu**
-![Img](screenshots/tinfoilio.jpg)
-
-**Download Progress**
-![Img](screenshots/downloading.jpg)
-
-**Update the Tinfoil NRO**
-![Img](screenshots/updatenro.jpg)
-
-**Completed Update**
-![Img](screenshots/complete.jpg)
-
-**Update the App**
-![Img](screenshots/updateapp.jpg)
+coming soon
 
 ----
 
 # Special Thanks!
 
-[ITotalJustice](https://github.com/ITotalJustice) for coding everything in this app! I just added the GUI.
+[ITotalJustice](https://github.com/ITotalJustice) for coding everything in this app! I just changed things.
 
-[toph](https://github.com/sudot0ph) for the design of the app icon, as well as the most icons used within the app!
+[Jack](https://github.com/JackInTheShop) for adding the atmosphere-updater GUI to tinfoil-updater!
 
-[Black Rabbit](https://github.com/BlackRabbit22) for the design of the plus and error icon (and the idea for this app)!
+[rajkosto](https://github.com/rajkosto) for ChoiDojourNX and RajNX!
 
-[bandithedoge](https://github.com/bandithedoge) for the background!
+[ThiccSatan](https://twitter.com/chonyomankis) for all of the new icons and the new background! 🐢
 
-[KrankRival](https://github.com/KranKRival) for the initial sys / ams version pr (and for motivating me to work on touch controls)!
+[UNderPrivlidged](https://github.com/UNderPrivlidged) for hosting firmware!
+
+[blawar](https://github.com/blawar) for Switch Dev help and Tinfoil!
+
+[Black Rabbit](https://github.com/BlackRabbit22) for the design of the plus icon!
+
+[KrankRival](https://github.com/KranKRival) for the initial sys / ams version pr!
+
+
+
+
 
 ----
 
 # Patreon
 
-Feel free to support me ITotalJustice on patreon, he would really appreciate it!
+Feel free to support ITotalJustice on patreon, he would really appreciate it!
 
 <a href="https://www.patreon.com/totaljustice"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Patreon donate button" /> </a>

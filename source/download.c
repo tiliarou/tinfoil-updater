@@ -7,7 +7,7 @@
 #include "menu.h"
 #include "util.h"           // for ON / OFF defines.
 
-#define API_AGENT           "ITotalJustice"
+#define API_AGENT           "arch-box"
 #define DOWNLOAD_BAR_MAX    500
 
 struct MemoryStruct
@@ -26,15 +26,15 @@ static size_t write_memory_callback(void *contents, size_t size, size_t nmemb, v
 
   if (ptr == NULL)
   {
-      errorBox(350, 250, "Failed to realloc mem");
+      errorBox(350, 250, "Failed to realloc mem! Do not run in applet mode!");
       return 0;
   }
- 
+
   mem->memory = ptr;
   memcpy(&(mem->memory[mem->size]), contents, realsize);
   mem->size += realsize;
   mem->memory[mem->size] = 0;
- 
+
   return realsize;
 }
 
@@ -65,15 +65,14 @@ int download_progress(void *p, double dltotal, double dlnow, double ultotal, dou
 int downloadFile(const char *url, const char *output)
 {
     CURL *curl = curl_easy_init();
+	FILE *fp = fopen(output, "wb");
     if (curl)
     {
-        FILE *fp = fopen(output, "wb");
         if (fp)
         {
             struct MemoryStruct chunk;
             chunk.memory = malloc(1);
             chunk.size = 0;
-
             curl_easy_setopt(curl, CURLOPT_URL, url);
             curl_easy_setopt(curl, CURLOPT_USERAGENT, API_AGENT);
             curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
@@ -101,9 +100,11 @@ int downloadFile(const char *url, const char *output)
 
             if (res == CURLE_OK) return 0;
         }
-        fclose(fp);
+
     }
 
-    errorBox(350, 250, "Download failed");
+    errorBox(345, 250, "Download failed! Are you offline?");
+	remove(fp);
+	fclose(fp);
     return 1;
 }

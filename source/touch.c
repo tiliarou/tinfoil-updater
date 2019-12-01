@@ -10,7 +10,7 @@ int touch_cursor(int x, int y)
     for (int nl=0; cursor < (CURSOR_LIST_MAX+1); cursor++, nl+=NEWLINE)
         if (y > (FIRST_LINE + nl - HIGHLIGHT_BOX_MIN) && y < (FIRST_LINE + nl + NEWLINE - HIGHLIGHT_BOX_MIN))
             break;
-            
+
     return cursor;
 }
 

@@ -6,15 +6,12 @@
 #include "util.h"
 #include "download.h"
 
-#define APP_VERSION "(Unofficial) Tinfoil Updater: 0.3.1"
-
-char *url[] = { TINFOIL_URL, HBG_URL };
-int url_location = 0;
+#define APP_VERSION "Firmware Downloader 0.1.0"
 
 void refreshScreen()
 {
     clearRenderer();
-    
+
     // app version.
     drawText(fntMedium, 40, 40, SDL_GetColour(white), APP_VERSION);
 
@@ -29,39 +26,13 @@ void printOptionList(int cursor)
 {
     refreshScreen();
 
-    char *option_list[]      = {    "Full Tinfoil Update", \
-                                    "Tinfoil Folder Update", \
-                                    "Tinfoil NRO Update", \
-                                    "Update App" };
+    char *option_list[]      = {    "Download latest Official Firmware files", \
+                                    "Download legacy Official Firmware files" };
 
-    char *description_list[] = {    "Update everything for Tinfoil", \
-                                    "Update only the Tinfoil folder", \
-                                    "Update only the Tinfoil NRO", \
-                                    "Update this app and removes the old version" };
+    char *description_list[] = {    "This app extracts OFW files to sd:/OFW/ for installation with ChoiDojourNX.", \
+                                    "This app extracts OFW files to sd:/OFW/ for installation with ChoiDojourNX." };
 
-    char *legacy_options[]   = {    "Tinfoil v5.0.0", \
-                                    "Tinfoil v4.1.0", \
-                                    "Tinfoil v4.0.0", \
-                                    "Tinfoil v3.0.2", \
-                                    "Tinfoil v3.0.1", \
-                                    "Tinfoil v3.0.0", \
-                                    "Tinfoil v2.1.0", \
-                                    "Tinfoil v2.0.1", \
-                                    "Tinfoil v2.0.0" };
-
-    char *legacy_url[]       = {    legacy500, \
-                                    legacy410, \
-                                    legacy400, \
-                                    legacy302, \
-                                    legacy301, \
-                                    legacy300, \
-                                    legacy210, \
-                                    legacy201, \
-                                    legacy200 };
-
-    char *url_list[] = { "tinfoil.io", "hbgshop.ga" };
-
-    SDL_Texture *textureArray[] = { tinfoil_icon, tinfoil_icon, tinfoil_icon, app_icon };
+    SDL_Texture *textureArray[] = { down_icon, app_icon };
 
     for (int i=0, nl=0; i < (CURSOR_LIST_MAX+1); i++, nl+=NEWLINE)
     {
@@ -69,30 +40,16 @@ void printOptionList(int cursor)
         else
         {
             // icon for the option selected.
-            drawImage(textureArray[i], 125, 350);
+            drawImage(textureArray[i], 125, 250);
             // highlight box.
             drawShape(SDL_GetColour(dark_blue), 530, (FIRST_LINE + nl - HIGHLIGHT_BOX_MIN), 700, HIGHLIGHT_BOX_MAX);
             // option text.
             drawText(fntSmall, 550, FIRST_LINE+nl, SDL_GetColour(jordy_blue), option_list[i]);
             // description.
-            drawText(fntSmall, 25, 675, SDL_GetColour(white), description_list[i]);
-            // url
-            char urlText[16];
-            sprintf(urlText,"Host: %s",url_list[url_location]);
-            drawText(fntMedium, 40, 150, SDL_GetColour(white), urlText);
+			drawText(fntSmall, 15,605, SDL_GetColour(white), "Note that writing to an exFAT SD card can cause corruption. Be sure to use FAT32.");
+            drawText(fntSmall, 15, 540, SDL_GetColour(white), description_list[i]);
         }
     }
-}
-
-void changeUrl()
-{
-    if (url_location == 0) url_location = 1;
-    else url_location = 0;
-}
-
-char *getUrl()
-{
-    return url[url_location];
 }
 
 void popUpBox(TTF_Font *font, int x, int y, SDL_Colour colour, char *text)
@@ -155,5 +112,5 @@ void errorBox(int x, int y, char *errorText)
     drawImageScale(error_icon, 570, 340, 128, 128);
     updateRenderer();
 
-    sleep(3);
+    sleep(5);
 }

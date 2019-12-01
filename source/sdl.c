@@ -128,7 +128,7 @@ void loadTextures()
 {
     imageLoad(&background,      "romfs:/background.png");
     imageLoad(&app_icon,        "romfs:/app_icon.png");
-    imageLoad(&tinfoil_icon,        "romfs:/tinfoil_icon.png");
+    imageLoad(&down_icon,        "romfs:/down_icon.png");
     imageLoad(&error_icon,      "romfs:/error_icon.png");
 }
 
@@ -142,7 +142,7 @@ void destroyTextures()
 
     SDL_DestroyTexture(background);
     SDL_DestroyTexture(app_icon);
-    SDL_DestroyTexture(tinfoil_icon);
+    SDL_DestroyTexture(down_icon);
     SDL_DestroyTexture(error_icon);
 }
 
@@ -152,9 +152,9 @@ void sdlInit()
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
-    main_window = SDL_CreateWindow("totaljustice", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_W, SCREEN_H, SDL_WINDOW_SHOWN);
+    main_window = SDL_CreateWindow("firmware-downloader", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_W, SCREEN_H, SDL_WINDOW_SHOWN);
     main_renderer = SDL_CreateRenderer(main_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    
+
     // highest quality
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 
